@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "218958519083",
+    "project_id": "phonestore-f9b65",
+    "storage_bucket": "phonestore-f9b65.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:218958519083:android:b30cd70e0a00edfa12836e",
+        "android_client_info": {
+          "package_name": "com.example.phonestore"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCacXBNDmp7xjA4SIfrbCHUTS4CmcqSudQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
