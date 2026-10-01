@@ -1,38 +1,67 @@
 package com.example.phonestore;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
+import android.text.TextUtils;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
-import com.google.firebase.firestore.FirebaseFirestore;
-
-import java.util.HashMap;
-import java.util.Map;
+import com.example.phonestore.databinding.ActivityMainBinding;
+import com.example.phonestore.ui.LoginActivity;
+import com.example.phonestore.utils.PreferenceManager;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity {
+
+    private ActivityMainBinding binding;
+    private PreferenceManager prefManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        Map<String, Object> data = new HashMap<>();
-        data.put("test", "Ket noi thanh cong");
 
-        db.collection("test_connection")
-                .add(data)
-                .addOnSuccessListener(ref -> Log.d("FIREBASE_TEST", "Ghi thanh cong: " + ref.getId()))
-                .addOnFailureListener(e -> Log.e("FIREBASE_TEST", "Loi: ", e));
-        EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_main);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
+        prefManager = new PreferenceManager(this);
+
+        // Kiểm tra xem đã đăng nhập chưa
+        if (!prefManager.isLoggedIn()) {
+            startLoginActivity();
+            finish();
+            return;
+        }
+
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+
+        setupUserInfo();
+        setupListeners();
+    }
+
+    private void setupUserInfo() {
+        String name = prefManager.getUserName();
+        String email = prefManager.getUserEmail();
+
+        if (!TextUtils.isEmpty(name)) {
+            binding.tvUserName.setText(name);
+        }
+        if (!TextUtils.isEmpty(email)) {
+            binding.tvUserEmail.setText(email);
+        }
+    }
+
+    private void setupListeners() {
+        binding.btnLogout.setOnClickListener(v -> {
+            // Đăng xuất Firebase & Xóa Session SharedPreferences
+            FirebaseAuth.getInstance().signOut();
+            prefManager.clearSession();
+
+            startLoginActivity();
+            finish();
         });
+    }
+
+    private void startLoginActivity() {
+        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
     }
 }

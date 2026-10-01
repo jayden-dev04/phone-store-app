@@ -26,9 +26,14 @@ android {
             }
         }
     }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
+    }
+
+    buildFeatures {
+        viewBinding = true
     }
 }
 
@@ -39,13 +44,11 @@ dependencies {
     implementation(libs.material)
 
     implementation(platform(libs.firebase.bom))
-    implementation(libs.firebase.firestore) // Nếu dùng Cloud Firestore
-    implementation(libs.firebase.database)  // Nếu dùng Realtime Database
+    implementation(libs.firebase.firestore)
+    implementation(libs.firebase.database)
     implementation(libs.firebase.auth)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.espresso.core)
     androidTestImplementation(libs.ext.junit)
-
-    implementation("com.google.firebase:firebase-firestore")
 }

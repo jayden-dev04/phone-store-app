@@ -1,3 +1,35 @@
 <resources>
     <string name="app_name">PhoneStore</string>
+    <string name="app_subtitle">Thế Giới Điện Thoại Thông Minh</string>
+    
+    <!-- Login Strings (Instagram/Meta Style) -->
+    <string name="hint_account_meta">Username, email or mobile number</string>
+    <string name="hint_password_meta">Password</string>
+    <string name="btn_login_meta">Log in</string>
+    <string name="forgot_password_meta">Forgot password?</string>
+    <string name="btn_create_account_meta">Create new account</string>
+    <string name="footer_brand_meta">PhoneStore</string>
+    
+    <!-- Register Strings -->
+    <string name="title_create_account">Create new account</string>
+    <string name="hint_full_name_meta">Full name</string>
+    <string name="hint_email_meta">Email address</string>
+    <string name="hint_phone_meta">Mobile number</string>
+    <string name="hint_confirm_password_meta">Confirm password</string>
+    <string name="btn_register_meta">Create account</string>
+    <string name="btn_already_have_account_meta">Already have an account? Log in</string>
+
+    <!-- Forgot Password Strings -->
+    <string name="title_reset_meta">Find your account</string>
+    <string name="desc_reset_meta">Enter your email or mobile number to reset your password.</string>
+    <string name="btn_continue_meta">Continue</string>
+    <string name="btn_cancel_meta">Cancel</string>
+
+    <!-- Messages -->
+    <string name="err_empty_fields">Please fill in all fields.</string>
+    <string name="err_invalid_email">Invalid email address.</string>
+    <string name="err_password_length">Password must be at least 6 characters.</string>
+    <string name="err_passwords_dont_match">Passwords do not match.</string>
+    <string name="msg_login_success">Logged in successfully!</string>
+    <string name="msg_register_success">Account created successfully!</string>
 </resources>
