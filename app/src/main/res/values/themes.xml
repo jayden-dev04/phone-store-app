@@ -7,4 +7,11 @@
         <item name="android:windowBackground">@drawable/bg_pastel_gradient</item>
     </style>
     <style name="Theme.PhoneStore" parent="Base.Theme.PhoneStore" />
+
+    <style name="Theme.PhoneStore.Splash" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="android:statusBarColor">@color/splash_purple</item>
+        <item name="android:navigationBarColor">@color/splash_purple</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:windowBackground">@color/splash_purple</item>
+    </style>
 </resources>

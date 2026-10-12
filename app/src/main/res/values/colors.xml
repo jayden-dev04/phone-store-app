@@ -2,7 +2,8 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    
+    <color name="splash_purple">#5A31F4</color>
+
     <color name="primary">#0064E0</color>
     <color name="primary_dark">#004F80</color>
     <color name="primary_pressed">#0052B8</color>
