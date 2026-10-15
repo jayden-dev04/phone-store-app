@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="100dp"
+    android:layout_height="100dp"
+    android:layout_marginEnd="12dp"
+    app:cardBackgroundColor="#FFFFFF"
+    app:cardCornerRadius="18dp"
+    app:cardElevation="1dp"
+    app:strokeWidth="0dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="8dp">
+
+        <ImageView
+            android:id="@+id/imgCollectionIcon"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:background="#F0EEFF"
+            android:contentDescription="Collection Icon"
+            android:padding="8dp"
+            android:src="@android:drawable/ic_menu_agenda"
+            app:tint="#5A31F4" />
+
+        <TextView
+            android:id="@+id/tvCollectionName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textColor="#111111"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            tools:text="All Saved" />
+
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>

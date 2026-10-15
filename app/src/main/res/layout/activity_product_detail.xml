@@ -33,10 +33,11 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <!-- Main Product Image -->
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="260dp"
-                app:cardCornerRadius="16dp"
+                app:cardCornerRadius="20dp"
                 app:cardElevation="2dp"
                 app:strokeWidth="0dp">
 
@@ -45,10 +46,27 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:contentDescription="@string/app_name"
+                    android:padding="16dp"
                     android:scaleType="fitCenter"
                     android:src="@drawable/ic_phone_store" />
 
             </com.google.android.material.card.MaterialCardView>
+
+            <!-- Product Image Thumbnails Bar -->
+            <HorizontalScrollView
+                android:id="@+id/scrollViewThumbnails"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:scrollbars="none">
+
+                <LinearLayout
+                    android:id="@+id/layoutThumbnails"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal" />
+
+            </HorizontalScrollView>
 
             <TextView
                 android:id="@+id/tvDetailBrand"
@@ -75,9 +93,36 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:textColor="@color/primary"
-                android:textSize="20sp"
+                android:textSize="22sp"
                 android:textStyle="bold"
                 tools:text="30.990.000 đ" />
+
+            <!-- Variants Title -->
+            <TextView
+                android:id="@+id/tvVariantTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Tùy chọn dung lượng"
+                android:textColor="@color/text_dark"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <!-- Horizontal Variants Group -->
+            <HorizontalScrollView
+                android:id="@+id/scrollViewVariants"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:scrollbars="none">
+
+                <LinearLayout
+                    android:id="@+id/layoutVariants"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal" />
+
+            </HorizontalScrollView>
 
             <View
                 android:layout_width="match_parent"
@@ -102,7 +147,37 @@
                 android:lineSpacingExtra="4dp"
                 android:textColor="@color/text_sub"
                 android:textSize="14sp"
-                tools:text="Mô tả ngắn gọn sản phẩm..." />
+                tools:text="Mô tả chi tiết sản phẩm..." />
+
+            <!-- Separator -->
+            <View
+                android:id="@+id/dividerRelated"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="16dp"
+                android:background="#E0E0E0" />
+
+            <!-- Related Products Section Title -->
+            <TextView
+                android:id="@+id/tvRelatedTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sản phẩm liên quan"
+                android:textColor="@color/text_dark"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <!-- Related Products Horizontal RecyclerView -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvRelatedProducts"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:clipToPadding="false"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/item_product_horizontal" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btnAddToCart"

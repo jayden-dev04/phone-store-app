@@ -16,6 +16,7 @@ import com.example.phonestore.R;
 import com.example.phonestore.data.AuthState;
 import com.example.phonestore.databinding.ActivityLoginBinding;
 import com.example.phonestore.model.User;
+import com.example.phonestore.ui.admin.AdminMainActivity;
 import com.example.phonestore.utils.PreferenceManager;
 import com.example.phonestore.viewmodel.LoginViewModel;
 
@@ -32,7 +33,7 @@ public class LoginActivity extends AppCompatActivity {
         prefManager = new PreferenceManager(this);
 
         if (prefManager.isLoggedIn()) {
-            startMainActivity();
+            startNextActivityBasedOnRole(prefManager.getUserRole());
             finish();
             return;
         }
@@ -83,12 +84,13 @@ public class LoginActivity extends AppCompatActivity {
                 case SUCCESS:
                     showLoading(false);
                     User user = authState.getUser();
+                    int role = (user != null) ? user.getRole() : User.ROLE_USER;
                     if (user != null) {
-                        prefManager.saveUserSession(true, user.getEmail(), user.getFullName());
+                        prefManager.saveUserSession(true, user.getEmail(), user.getFullName(), role);
                     }
                     String successMsg = authState.getMessage() != null ? authState.getMessage() : getString(R.string.msg_login_success);
                     Toast.makeText(this, successMsg, Toast.LENGTH_SHORT).show();
-                    startMainActivity();
+                    startNextActivityBasedOnRole(role);
                     finish();
                     break;
 
@@ -137,8 +139,17 @@ public class LoginActivity extends AppCompatActivity {
         builder.show();
     }
 
-    private void startMainActivity() {
-        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+    private void startNextActivityBasedOnRole(int role) {
+        Intent intent;
+        if (role == User.ROLE_ADMIN) {
+            intent = new Intent(LoginActivity.this, AdminMainActivity.class);
+        } else {
+            intent = new Intent(LoginActivity.this, MainActivity.class);
+        }
         startActivity(intent);
+    }
+
+    private void startMainActivity() {
+        startNextActivityBasedOnRole(User.ROLE_USER);
     }
 }

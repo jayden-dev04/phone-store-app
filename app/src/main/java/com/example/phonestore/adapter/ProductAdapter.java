@@ -1,23 +1,19 @@
 package com.example.phonestore.adapter;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.phonestore.R;
 import com.example.phonestore.databinding.ItemProductBinding;
 import com.example.phonestore.model.Product;
 
-import java.io.InputStream;
-import java.net.URL;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-import java.util.concurrent.Executors;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductViewHolder> {
 
@@ -98,18 +94,14 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
                 binding.tvProductPrice.setText("Liên hệ");
             }
 
-            binding.imgProduct.setImageResource(R.drawable.ic_phone_store);
             if (product.getImages() != null && !product.getImages().isEmpty()) {
-                String imageUrl = product.getImages().get(0);
-                Executors.newSingleThreadExecutor().execute(() -> {
-                    try {
-                        URL url = new URL(imageUrl);
-                        InputStream input = url.openConnection().getInputStream();
-                        Bitmap bitmap = BitmapFactory.decodeStream(input);
-                        binding.getRoot().post(() -> binding.imgProduct.setImageBitmap(bitmap));
-                    } catch (Exception ignored) {
-                    }
-                });
+                Glide.with(binding.getRoot().getContext())
+                        .load(product.getImages().get(0))
+                        .placeholder(R.drawable.ic_phone_store)
+                        .error(R.drawable.ic_phone_store)
+                        .into(binding.imgProduct);
+            } else {
+                binding.imgProduct.setImageResource(R.drawable.ic_phone_store);
             }
 
             binding.getRoot().setOnClickListener(v -> {

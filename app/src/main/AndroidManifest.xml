@@ -40,6 +40,47 @@
             android:exported="false" />
 
         <activity
+            android:name=".ui.SavedActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+
+        <activity
+            android:name=".ui.admin.AdminMainActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".ui.admin.AdminProductListActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+
+        <activity
+            android:name=".ui.admin.AdminEditProductActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+
+        <activity
+            android:name=".ui.admin.AdminOrderListActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".ui.admin.AdminUserListActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".ui.CheckoutActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+
+        <activity
+            android:name=".ui.OrderHistoryActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".ui.ProfileActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+
+        <activity
             android:name=".MainActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />

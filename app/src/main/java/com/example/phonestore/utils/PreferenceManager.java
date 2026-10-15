@@ -12,6 +12,7 @@ public class PreferenceManager {
     private static final String KEY_IS_LOGGED_IN = "is_logged_in";
     private static final String KEY_USER_EMAIL = "user_email";
     private static final String KEY_USER_NAME = "user_name";
+    private static final String KEY_USER_ROLE = "user_role";
 
     private final SharedPreferences pref;
     private final SharedPreferences.Editor editor;
@@ -46,9 +47,14 @@ public class PreferenceManager {
     }
 
     public void saveUserSession(boolean isLoggedIn, String email, String name) {
+        saveUserSession(isLoggedIn, email, name, 2);
+    }
+
+    public void saveUserSession(boolean isLoggedIn, String email, String name, int role) {
         editor.putBoolean(KEY_IS_LOGGED_IN, isLoggedIn);
         editor.putString(KEY_USER_EMAIL, email);
         editor.putString(KEY_USER_NAME, name);
+        editor.putInt(KEY_USER_ROLE, role);
         editor.apply();
     }
 
@@ -64,10 +70,15 @@ public class PreferenceManager {
         return pref.getString(KEY_USER_NAME, "");
     }
 
+    public int getUserRole() {
+        return pref.getInt(KEY_USER_ROLE, 2);
+    }
+
     public void clearSession() {
         editor.putBoolean(KEY_IS_LOGGED_IN, false);
         editor.remove(KEY_USER_EMAIL);
         editor.remove(KEY_USER_NAME);
+        editor.remove(KEY_USER_ROLE);
         editor.apply();
     }
 }

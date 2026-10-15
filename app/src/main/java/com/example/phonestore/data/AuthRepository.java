@@ -90,8 +90,15 @@ public class AuthRepository {
     }
 
     private void mockApiLogin(String account, String password, AuthCallback callback, String originalError) {
-        if ("admin@phonestore.com".equalsIgnoreCase(account) || "0987654321".equals(account)) {
-            User mockUser = new User("mock_uid_123", "Người Dùng PhoneStore", account, "0987654321", System.currentTimeMillis());
+        if ("admin@phonestore.com".equalsIgnoreCase(account)) {
+            if ("123admin".equals(password)) {
+                User mockAdmin = new User("admin_uid_001", "Quản Trị Viên", account, "0987654321", System.currentTimeMillis(), User.ROLE_ADMIN);
+                callback.onSuccess(mockAdmin, "Đăng nhập QTV thành công!");
+            } else {
+                callback.onError("Mật khẩu không chính xác cho tài khoản Admin.");
+            }
+        } else if ("0987654321".equals(account)) {
+            User mockUser = new User("mock_uid_123", "Người Dùng PhoneStore", account, "0987654321", System.currentTimeMillis(), User.ROLE_USER);
             callback.onSuccess(mockUser, "Đăng nhập thành công!");
         } else {
             String errorMsg = TextUtils.isEmpty(originalError) ? "Tài khoản hoặc mật khẩu không chính xác." : originalError;
@@ -132,15 +139,22 @@ public class AuthRepository {
                     if (documentSnapshot.exists()) {
                         User user = documentSnapshot.toObject(User.class);
                         if (user != null) {
+                            if ("admin@phonestore.com".equalsIgnoreCase(user.getEmail())) {
+                                user.setRole(User.ROLE_ADMIN);
+                            }
                             callback.onSuccess(user, "Đăng nhập thành công!");
                             return;
                         }
                     }
-                    User fallbackUser = new User(uid, "Khách hàng", fallbackEmail, "", System.currentTimeMillis());
+                    int role = "admin@phonestore.com".equalsIgnoreCase(fallbackEmail) ? User.ROLE_ADMIN : User.ROLE_USER;
+                    String name = role == User.ROLE_ADMIN ? "Quản Trị Viên" : "Khách hàng";
+                    User fallbackUser = new User(uid, name, fallbackEmail, "", System.currentTimeMillis(), role);
                     callback.onSuccess(fallbackUser, "Đăng nhập thành công!");
                 })
                 .addOnFailureListener(e -> {
-                    User fallbackUser = new User(uid, "Khách hàng", fallbackEmail, "", System.currentTimeMillis());
+                    int role = "admin@phonestore.com".equalsIgnoreCase(fallbackEmail) ? User.ROLE_ADMIN : User.ROLE_USER;
+                    String name = role == User.ROLE_ADMIN ? "Quản Trị Viên" : "Khách hàng";
+                    User fallbackUser = new User(uid, name, fallbackEmail, "", System.currentTimeMillis(), role);
                     callback.onSuccess(fallbackUser, "Đăng nhập thành công!");
                 });
     }
