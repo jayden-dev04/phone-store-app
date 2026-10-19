@@ -62,7 +62,7 @@ public class OrderRepository {
             return;
         }
 
-        getOrdersReference(userEmail).addValueEventListener(new ValueEventListener() {
+        getOrdersReference(userEmail).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 ArrayList<Order> orderList = new ArrayList<>();

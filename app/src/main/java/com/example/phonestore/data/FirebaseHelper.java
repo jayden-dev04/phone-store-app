@@ -40,7 +40,7 @@ public class FirebaseHelper {
             // Kết nối TRỰC TIẾP đến Online Firebase Realtime Database
             DatabaseReference databaseRef = FirebaseDatabase.getInstance(DB_URL).getReference(PRODUCTS_NODE);
 
-            databaseRef.addValueEventListener(new ValueEventListener() {
+            databaseRef.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     ArrayList<Product> productList = new ArrayList<>();

@@ -53,7 +53,7 @@ public class AdminOrderListActivity extends AppCompatActivity implements AdminOr
 
         DatabaseReference ordersRef = FirebaseDatabase.getInstance(DB_URL).getReference("Orders");
 
-        ordersRef.addValueEventListener(new ValueEventListener() {
+        ordersRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 binding.progressBarAdminOrders.setVisibility(View.GONE);

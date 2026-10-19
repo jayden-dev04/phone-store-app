@@ -80,7 +80,7 @@ public class CartRepository {
             return;
         }
 
-        getCartReference(userEmail).addValueEventListener(new ValueEventListener() {
+        getCartReference(userEmail).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 ArrayList<CartItem> cartList = new ArrayList<>();
