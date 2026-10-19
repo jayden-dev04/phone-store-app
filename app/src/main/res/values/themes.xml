@@ -5,6 +5,7 @@
         <item name="android:statusBarColor">#FAF3F8</item>
         <item name="android:windowLightStatusBar">true</item>
         <item name="android:windowBackground">@drawable/bg_pastel_gradient</item>
+        <item name="android:fitsSystemWindows">true</item>
     </style>
     <style name="Theme.PhoneStore" parent="Base.Theme.PhoneStore" />
 
